@@ -1,30 +1,20 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import { ListaconvidadosDataSource, ListaconvidadosItem } from './listaconvidados-datasource';
+import { IColaborador } from './../servicos/colaborador';
+import { Component, OnInit } from '@angular/core';
+import { ColaboradorServiceService } from '../servicos/colaborador-service.service';
 
 @Component({
   selector: 'app-listaconvidados',
   templateUrl: './listaconvidados.component.html',
   styleUrls: ['./listaconvidados.component.css']
 })
-export class ListaconvidadosComponent implements AfterViewInit, OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<ListaconvidadosItem>;
-  dataSource: ListaconvidadosDataSource;
+export class ListaconvidadosComponent implements OnInit {
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name', 'email', 'editar', 'excluir'];
+  colaboradores: IColaborador[];
 
-  ngOnInit() {
-    this.dataSource = new ListaconvidadosDataSource();
-  }
+  constructor(private colaboradorService: ColaboradorServiceService) { }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+  ngOnInit(): void {
+    this.colaboradorService.getColaboradores()
+      .subscribe(data => this.colaboradores = data);
   }
 }

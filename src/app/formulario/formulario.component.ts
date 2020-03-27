@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -7,12 +7,13 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./formulario.component.css']
 })
 
-export class FormularioComponent {
+export class FormularioComponent implements OnInit {
 
   areas: string[] = ['Gestão', 'Serviço ao Cliente', 'Infraestrutura', 'Desenvolvimento', 'Financeiro', 'Diretoria'];
 
   areaSelecionada: string;
 
+  // Código para fazer a validação dos campos e vínculos com a view
   formColaborador = this.fb.group({
     nomeColaborador: [
       null, [
@@ -39,6 +40,10 @@ export class FormularioComponent {
   });
 
   constructor(private fb: FormBuilder) {}
+
+  // Aqui fica se observando dados alterados no servidor de backend
+  ngOnInit() {
+  }
 
   onSubmit() {
     console.log(this.formColaborador.get('nomeColaborador').value);

@@ -10,6 +10,8 @@ import { FormularioComponent } from './formulario/formulario.component';
 import { ListaconvidadosComponent} from './listaconvidados/listaconvidados.component';
 import { FormulariopremontadoComponent } from './formulariopremontado/formulariopremontado.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ColaboradorServiceService } from './servicos/colaborador-service.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,12 +22,13 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule
    ],
-  providers: [],
+  providers: [ColaboradorServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

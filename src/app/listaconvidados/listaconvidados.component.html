@@ -1,43 +1,10 @@
-<div class="mat-elevation-z8">
-  <table mat-table class="full-width-table" matSort aria-label="Elements">
-    <!-- Coluna ID -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-      <td mat-cell *matCellDef="let row">{{row.id}}</td>
-    </ng-container>
+<p>listaconvidados works!</p>
 
-    <!-- Coluna Nome -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-      <td mat-cell *matCellDef="let row">{{row.name}}</td>
-    </ng-container>
-
-    <!-- Coluna Email -->
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-      <td mat-cell *matCellDef="let row">{{row.email}}</td>
-    </ng-container>
-
-    <!-- Coluna Editar -->
-    <ng-container matColumnDef="editar">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Editar</th>
-      <td mat-cell *matCellDef="let row"><img class="icone" src="../../assets/img/alterar.png" alt="editar"></td>
-    </ng-container>
-
-    <!-- Coluna Excluir -->
-    <ng-container matColumnDef="excluir">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Excluir</th>
-      <td mat-cell *matCellDef="let row"><img class="icone" src="../../assets/img/excluir.png" alt="excluir"/></td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <mat-paginator #paginator
-      [length]="dataSource?.data.length"
-      [pageIndex]="0"
-      [pageSize]="50"
-      [pageSizeOptions]="[25, 50, 100, 250]">
-  </mat-paginator>
+<div *ngIf="colaboradores">
+  <ul *ngFor="let colaborador of colaboradores">
+    <li>{{ colaborador.id_col }}</li>
+    <li>{{ colaborador.id_dep_id }}</li>
+    <li>{{ colaborador.col_email }}</li>
+    <li>{{ colaborador.companions }} </li>
+  </ul>
 </div>
