@@ -1,0 +1,45 @@
+.cartao-inscricao{
+  margin-top: 35px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+mat-card-header{
+  padding-top: 1em;
+}
+
+.nome-colaborador{
+  width: 100% !important;
+  margin-top: 1em;
+}
+
+.email-colaborador{
+  width: 48% !important;
+  margin-top: 1em;
+}
+
+.area-colaborador{
+  width: 48% !important;
+  float: right;
+  margin-top: 1em;
+}
+
+.botao{
+  margin-bottom: 15px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.nome-acompanhante{
+  width: 100%;
+}
+
+mat-radio-button[value='sim']{
+  margin-top: 5px;
+  margin-right: 100px;
+  margin-bottom: 5px;
+}
+
+mat-radio-button[value='nao']{
+  margin-bottom: 5px;
+}

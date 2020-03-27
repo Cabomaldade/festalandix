@@ -1,0 +1,24 @@
+.logo-menu {
+  height: 62px;
+}
+
+.separacao {
+  flex: 1 1 auto;
+}
+
+mat-slide-toggle {
+  float: right;
+  margin: 3px;
+  margin-right: 6px;
+}
+
+mat-card {
+  float: right;
+  margin-top: 40px;
+  margin-right: 20px;
+  width: 200px;
+}
+
+mat-card-actions {
+  margin-left: 3px;
+}

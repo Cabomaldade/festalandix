@@ -1,0 +1,50 @@
+<form [formGroup]="formColaborador" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="cartao-inscricao">
+    <mat-card-header>
+      <mat-card-title>Preencha O Formulário E Confirme Sua Presença</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="container-fields1">
+        <mat-form-field appearance="fill" class="nome-colaborador">
+          <mat-label>Nome Completo</mat-label>
+          <input matInput formControlName="nomeColaborador" #nomec>
+          <mat-error>Preencha e revise - Deve conter mais de 5 e menos de 30 caracteres</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="email-colaborador">
+          <mat-label>Email Landix</mat-label>
+          <input matInput formControlName="emailColaborador">
+          <mat-error>Preencha e revise - deve ser um e-mail válido</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="area-colaborador">
+          <mat-label>Área</mat-label>
+          <mat-select formControlName="areaColaborador">
+            <div *ngFor="let area of areas">
+              <mat-option value="option" (click)="atribuiArea(area)">{{area}}</mat-option>
+            </div>
+          </mat-select>
+          <mat-error color="primary">Você deve selecionar uma opção</mat-error>
+        </mat-form-field>
+        <br>
+      </div>
+    </mat-card-content>
+    <mat-radio-group>
+      <mat-radio-button value="sim" #sim>Irei Levar Aconpanhante</mat-radio-button>
+      <mat-radio-button value="nao">Não Levarei Acompanhante</mat-radio-button>
+    </mat-radio-group>
+    <mat-card-content *ngIf='sim.checked'>
+      <div class="container-fields2">
+        <mat-form-field appearance="fill">
+          <mat-label>Nome Acompanhante</mat-label>
+          <input matInput formControlName="acompanhante" required>
+        </mat-form-field>
+        <br>
+      </div>
+    </mat-card-content>
+    <div class="botao">
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">Submeter</button>
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</form>
+
