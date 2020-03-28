@@ -5,3 +5,6 @@ export interface IColaborador {
   col_email: string;
   companions: [];
 }
+export interface IIds {
+  id_col: number;
+}

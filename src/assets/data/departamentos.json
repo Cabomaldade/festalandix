@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "valor": "Gestão"
+  },
+  {
+    "id": 2,
+    "valor": "Serviço ao Cliente"
+  },
+  {
+    "id": 3,
+    "valor": "Desenvolvimento"
+  },
+  {
+    "id": 4,
+    "valor": "Infraestrutura"
+  },
+  {
+    "id": 5,
+    "valor": "Financeiro"
+  },
+  {
+    "id": 6,
+    "valor": "Diretoria"
+  }
+]

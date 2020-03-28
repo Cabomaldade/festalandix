@@ -1,5 +1,8 @@
+import { IColaborador } from './../servicos/colaborador';
+import { DepartamentoService } from './../servicos/departamento.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ColaboradorServiceService } from '../servicos/colaborador-service.service';
 
 @Component({
   selector: 'app-formulario',
@@ -9,9 +12,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 export class FormularioComponent implements OnInit {
 
-  areas: string[] = ['Gestão', 'Serviço ao Cliente', 'Infraestrutura', 'Desenvolvimento', 'Financeiro', 'Diretoria'];
+  departamentos = []; // guarda os departamentos vindos do back
+  colaboradores: IColaborador[];
+  idsEmUtilizacao: number[];
 
-  areaSelecionada: string;
+  departamentoSelecionado: string;
 
   // Código para fazer a validação dos campos e vínculos com a view
   formColaborador = this.fb.group({
@@ -39,20 +44,34 @@ export class FormularioComponent implements OnInit {
     ]
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,
+              private colaboradorService: ColaboradorServiceService,
+              private departamentoServico: DepartamentoService) {}
 
   // Aqui fica se observando dados alterados no servidor de backend
   ngOnInit() {
+    this.departamentoServico.getDepartamentos()
+      .subscribe(data => this.departamentos = data);
+    this.carregarLista();
   }
 
+  /*filtra o Maior Id do Banco
+  retornaMaiorId(): number {
+    this.carregarLista();
+    //return Math.max(...this.colaboradores.id_col.map(o => o), 0);
+  }*/
+
+  carregarLista() {
+    this.colaboradorService.getColaboradores()
+    .subscribe(data => this.colaboradores = data);
+  }
+
+  // Classe para chamar o serviço de salvar no BD
   onSubmit() {
-    console.log(this.formColaborador.get('nomeColaborador').value);
-    console.log(this.formColaborador.get('emailColaborador').value);
-    console.log(this.areaSelecionada);
-    console.log(this.formColaborador.get('acompanhante').value);
+
   }
 
-  atribuiArea(selecaoArea: string) {
-    this.areaSelecionada = selecaoArea;
+  atribuiDepartamento(departamentoSelecionado: string) {
+    this.departamentoSelecionado = departamentoSelecionado;
   }
 }

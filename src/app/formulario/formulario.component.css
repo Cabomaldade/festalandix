@@ -43,3 +43,7 @@ mat-radio-button[value='sim']{
 mat-radio-button[value='nao']{
   margin-bottom: 5px;
 }
+
+.container-fields2 {
+  margin-top: 15px;
+}

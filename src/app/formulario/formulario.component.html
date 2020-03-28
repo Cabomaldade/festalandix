@@ -16,10 +16,10 @@
           <mat-error>Preencha e revise - deve ser um e-mail válido</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill" class="area-colaborador">
-          <mat-label>Área</mat-label>
+          <mat-label>Departamento</mat-label>
           <mat-select formControlName="areaColaborador">
-            <div *ngFor="let area of areas">
-              <mat-option value="option" (click)="atribuiArea(area)">{{area}}</mat-option>
+            <div *ngFor="let departamento of departamentos">
+              <mat-option value="option" (click)="atribuiDepartamento(departamento)">{{departamento.des_dep}}</mat-option>
             </div>
           </mat-select>
           <mat-error color="primary">Você deve selecionar uma opção</mat-error>

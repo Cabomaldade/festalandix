@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormularioComponent } from './formulario/formulario.component';
 import { ListaconvidadosComponent} from './listaconvidados/listaconvidados.component';
-import { FormulariopremontadoComponent } from './formulariopremontado/formulariopremontado.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ColaboradorServiceService } from './servicos/colaborador-service.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,7 +17,6 @@ import { ModalComponent } from './modal/modal.component';
   declarations: [
     AppComponent,
     FormularioComponent,
-    FormulariopremontadoComponent,
     ListaconvidadosComponent,
     ModalComponent
   ],

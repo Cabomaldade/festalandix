@@ -2,8 +2,10 @@ import { IColaborador } from './../servicos/colaborador';
 import { Component, OnInit } from '@angular/core';
 import { ColaboradorServiceService } from '../servicos/colaborador-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from './../modal/modal.component';
+import * as jsPDF from './../../../node_modules/jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-listaconvidados',
@@ -20,15 +22,18 @@ export class ListaconvidadosComponent implements OnInit {
 
   exclusaoColaborador = true; // logica exclusao
 
-  email: string; // logica modal popup
-
   displayedColumns: string[] = ['colaborador', 'acompanhantes', 'edicaoexclusao'];
 
   ngOnInit(): void {
-    this.colaboradorService.getColaboradores()
-      .subscribe(data => this.colaboradores = data);
+    this.carregarLista();
   }
 
+  carregarLista() {
+    this.colaboradorService.getColaboradores()
+    .subscribe(data => this.colaboradores = data);
+  }
+
+  // logica modal dialogo edição
   editarColaborador(data) {
     console.log(data);
     const dialogRef = this.dialog.open(ModalComponent, {
@@ -50,11 +55,11 @@ export class ListaconvidadosComponent implements OnInit {
   excluirColaborador(element) {
     console.log(element);
     const snackBarRef = this.snackBar.open(`Cadastro ${element.col_name} Excluído`, 'DESFAZER', {
-      duration: 5000
+      duration: 3000
     });
 
     snackBarRef.afterDismissed().subscribe(() => {
-      this.excluirColaboradorBD(this.exclusaoColaborador);
+      this.excluirColaboradorBD(this.exclusaoColaborador, element.id_col);
       this.exclusaoColaborador = true;
     });
 
@@ -64,11 +69,24 @@ export class ListaconvidadosComponent implements OnInit {
   }
 
   // logica exclusao
-  excluirColaboradorBD(validaExclusao: boolean) {
+  excluirColaboradorBD(validaExclusao: boolean, id: number) {
     if (validaExclusao) {
-      console.log('é se ferrou!!!');
-    } else {
-      console.log('aí garoto se safou');
+      this.colaboradorService.deleteColaborador(id)
+        .subscribe( () => this.carregarLista());
+      this.carregarLista();
     }
+  }
+
+  // salvar lista em PDF
+  gerarPDF() {
+    const doc = new jsPDF();
+    doc.autoTable({
+      html: '#my-table',
+      columns: [
+        { header: 'Nome do Colaborador', dataKey: 'colaborador' },
+        { header: 'Nome dos Acompanhantes', dataKey: 'acompanhante' },
+      ]
+    });
+    doc.save('listaconvidados.pdf');
   }
 }

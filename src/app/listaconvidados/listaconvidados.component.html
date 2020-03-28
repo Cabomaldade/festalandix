@@ -1,6 +1,10 @@
 <div class="mat-elevation-z8 tabelaprincipal">
-  <table mat-table [dataSource]="colaboradores" matSort>
+  <div>
+    <img class = "icpdf" src="../../assets/img/pdf.png" alt="extrair pdf" (click)="gerarPDF()">
+    <button mat-raised-button (click)="gerarPDF()" color="primary"> Gerar PDF</button>
+  </div>
 
+  <table mat-table [dataSource]="colaboradores" matSort id="my-table">
     <!-- Coluna Colaborador -->
     <ng-container matColumnDef="colaborador">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="left-align">
@@ -35,9 +39,3 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
-
-
-<div *ngIf="email">
-  You signed up with: <p></p>
-</div>
-

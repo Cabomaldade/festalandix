@@ -1,3 +1,4 @@
+import { DepartamentoService } from './../servicos/departamento.service';
 import { IColaborador } from './../servicos/colaborador';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -9,7 +10,12 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class ModalComponent implements OnInit {
 
+  departamentos = [];
+
+  areaSelecionada;
+
   constructor(
+    private departamentoServico: DepartamentoService,
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IColaborador) {}
 
@@ -18,6 +24,12 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.departamentoServico.getDepartamentos()
+      .subscribe(data => this.departamentos = data);
     console.log(this.data);
+  }
+
+  atribuiDepartamento(selecaoArea: string) {
+    this.areaSelecionada = selecaoArea;
   }
 }

@@ -8,6 +8,16 @@ table {
   margin-right: 2em;
 }
 
+button {
+  float: right;
+}
+
+.icpdf {
+  float: right;
+  height: 40px;
+  width: 50px;
+}
+
 img {
   height: 15px;
   width: 15px;

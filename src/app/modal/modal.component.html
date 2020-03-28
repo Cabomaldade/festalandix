@@ -12,9 +12,14 @@
     <mat-label>Acompanhantes</mat-label>
     <input matInput [(ngModel)]="data.companions">
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field appearance="fill" class="area-colaborador">
     <mat-label>Departamento</mat-label>
-    <input matInput [(ngModel)]="data.id_dep_id">
+    <mat-select>
+      <div *ngFor="let departamento of departamentos">
+        <mat-option value="atribuiDepartamento(departamento)" >{{departamento.valor}}</mat-option>
+      </div>
+    </mat-select>
+    <mat-error color="primary">Você deve selecionar uma opção</mat-error>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
