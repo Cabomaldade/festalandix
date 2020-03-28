@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Edite os Campos e click em confirmar</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Nome Completo</mat-label>
+    <input matInput [(ngModel)]="data.col_name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput [(ngModel)]="data.col_email">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Acompanhantes</mat-label>
+    <input matInput [(ngModel)]="data.companions">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Departamento</mat-label>
+    <input matInput [(ngModel)]="data.id_dep_id">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Confirmar</button>
+</div>
+
+

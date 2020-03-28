@@ -1,23 +1,33 @@
 <div class="mat-elevation-z8 tabelaprincipal">
   <table mat-table [dataSource]="colaboradores" matSort>
 
-    <!-- col_name Column -->
-    <ng-container matColumnDef="col_name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome Colaborador </th>
+    <!-- Coluna Colaborador -->
+    <ng-container matColumnDef="colaborador">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="left-align">
+        Nome do Colaborador </th>
       <td mat-cell *matCellDef="let element">
-        <p> {{element.col_name}} </p>
-        <img src="../../assets/img/alterar.png" alt="alterar">
-        <img src="../../assets/img/excluir.png" alt="excluir">
+        {{element.col_name}}
       </td>
     </ng-container>
 
-    <!-- companions Column -->
-    <ng-container matColumnDef="companions">
+    <!-- Coluna Acompanhante -->
+    <ng-container matColumnDef="acompanhantes">
       <th mat-header-cell *matHeaderCellDef> Acompanhantes </th>
       <td mat-cell *matCellDef="let element">
-        <p> {{element.companions}} </p>
-        <img src="../../assets/img/alterar.png" alt="alterar">
-        <img src="../../assets/img/excluir.png" alt="excluir">
+        {{element.companions}}
+      </td>
+    </ng-container>
+
+    <!-- Coluna Edicão / Exclusão-->
+    <ng-container matColumnDef="edicaoexclusao">
+      <th mat-header-cell *matHeaderCellDef > Editar / Excluir </th>
+      <td mat-cell *matCellDef="let element">
+        <img
+          src="../../assets/img/alterar.png"
+          class="editar" alt="editar" (click)="editarColaborador(element)">
+        <img
+          src="../../assets/img/excluir.png"
+          class="excluir" alt="editar" (click)="excluirColaborador(element)">
       </td>
     </ng-container>
 
@@ -25,3 +35,9 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
+
+
+<div *ngIf="email">
+  You signed up with: <p></p>
+</div>
+

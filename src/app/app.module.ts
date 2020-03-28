@@ -12,13 +12,15 @@ import { FormulariopremontadoComponent } from './formulariopremontado/formulario
 import { ReactiveFormsModule } from '@angular/forms';
 import { ColaboradorServiceService } from './servicos/colaborador-service.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormularioComponent,
     FormulariopremontadoComponent,
-    ListaconvidadosComponent
+    ListaconvidadosComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule
    ],
   providers: [ColaboradorServiceService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ModalComponent]
 })
 export class AppModule { }

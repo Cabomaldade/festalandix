@@ -18,6 +18,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -37,7 +41,11 @@ const MaterialComponents = [
   MatPaginatorModule,
   MatSortModule,
   MatButtonToggleModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  FormsModule
 ];
 
 @NgModule({
