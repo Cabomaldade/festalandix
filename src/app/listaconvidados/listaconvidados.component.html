@@ -1,10 +1,27 @@
-<p>listaconvidados works!</p>
+<div class="mat-elevation-z8 tabelaprincipal">
+  <table mat-table [dataSource]="colaboradores" matSort>
 
-<div *ngIf="colaboradores">
-  <ul *ngFor="let colaborador of colaboradores">
-    <li>{{ colaborador.id_col }}</li>
-    <li>{{ colaborador.id_dep_id }}</li>
-    <li>{{ colaborador.col_email }}</li>
-    <li>{{ colaborador.companions }} </li>
-  </ul>
+    <!-- col_name Column -->
+    <ng-container matColumnDef="col_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome Colaborador </th>
+      <td mat-cell *matCellDef="let element">
+        <p> {{element.col_name}} </p>
+        <img src="../../assets/img/alterar.png" alt="alterar">
+        <img src="../../assets/img/excluir.png" alt="excluir">
+      </td>
+    </ng-container>
+
+    <!-- companions Column -->
+    <ng-container matColumnDef="companions">
+      <th mat-header-cell *matHeaderCellDef> Acompanhantes </th>
+      <td mat-cell *matCellDef="let element">
+        <p> {{element.companions}} </p>
+        <img src="../../assets/img/alterar.png" alt="alterar">
+        <img src="../../assets/img/excluir.png" alt="excluir">
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 </div>

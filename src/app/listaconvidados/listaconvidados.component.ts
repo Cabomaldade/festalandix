@@ -9,9 +9,11 @@ import { ColaboradorServiceService } from '../servicos/colaborador-service.servi
 })
 export class ListaconvidadosComponent implements OnInit {
 
+  constructor(private colaboradorService: ColaboradorServiceService) { }
+
   colaboradores: IColaborador[];
 
-  constructor(private colaboradorService: ColaboradorServiceService) { }
+  displayedColumns: string[] = ['col_name', 'companions'];
 
   ngOnInit(): void {
     this.colaboradorService.getColaboradores()

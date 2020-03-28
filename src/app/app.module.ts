@@ -17,8 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     FormularioComponent,
-    ListaconvidadosComponent,
-    FormulariopremontadoComponent
+    FormulariopremontadoComponent,
+    ListaconvidadosComponent
   ],
   imports: [
     BrowserModule,
