@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { IColaborador, IIds } from './colaborador';
+import { IColaborador } from './colaborador';
+import { catchError } from 'rxjs/operators';
 
-import { catchError, map } from 'rxjs/operators';
+export interface IAcompanhantes {
+  id_comp: number;
+  id_col_id: number;
+  comp_name: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +35,25 @@ export class ColaboradorServiceService {
       );
   }
 
+  // Retorna a lista de todos colaboradores no servidor - api + 'collaborator'
+  getIdColaborador(): Observable<IColaborador[]> {
+    const url = `${this.api}collaborator/`;
+    return this.http.get<IColaborador[]>(url)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // Retornar os acompanhantes de um certo Id de colaborador
+  getAcompanhantes(id: number): Observable<IAcompanhantes[]> {
+    const url = `${this.api}companion/${id}`;
+    return this.http.get<IAcompanhantes[]>(url)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
   handleError(error: HttpErrorResponse) {
     return throwError(error.message);
   }
@@ -44,8 +68,31 @@ export class ColaboradorServiceService {
   }
 
   // Salvar Colaborador no Back/Banco
-  sendPostRequest(data: any): Observable<any> {
+  postColaborador(data: any): Observable<any> {
+    console.log('entrou no post Colaborador');
     const url = `${this.api}collaborator/`;
     return this.http.post<any>(url, data , this.httpOptions);
   }
+
+  // Salvar Acompanhantes no Back/Banco
+  postAcompanhante(data: any): Observable<any> {
+    console.log('entrou no post acompanhante');
+    const url = `${this.api}companion/`;
+    return this.http.post<any>(url, data , this.httpOptions);
+  }
+
+  // Alterar dados Colaborador
+  putColaborador(data: any): Observable<any> {
+    console.log('entrou no put');
+    const url = `${this.api}collaborator/`;
+    return this.http.put<any>(url, data , this.httpOptions);
+  }
+
+  // Alterar dados Acompanhante
+  putAcompanhante(data: any): Observable<any> {
+    console.log('entrou no put2');
+    const url = `${this.api}companion/`;
+    return this.http.put<any>(url, data , this.httpOptions);
+  }
 }
+

@@ -1,3 +1,4 @@
+import { IAcompanhantes } from './../servicos/colaborador-service.service';
 import { DepartamentoService } from './../servicos/departamento.service';
 import { IColaborador } from './../servicos/colaborador';
 import { Component, OnInit } from '@angular/core';
@@ -23,6 +24,8 @@ export class ListaconvidadosComponent implements OnInit {
 
   colaboradores: IColaborador[];
 
+  acompanhantes: IAcompanhantes[];
+
   departamentos: IDepartamento[];
 
   exclusaoColaborador = true; // logica exclusao
@@ -38,6 +41,11 @@ export class ListaconvidadosComponent implements OnInit {
     this.colaboradorService.getColaboradores().subscribe(data => this.colaboradores = data);
     // Carrega dados departamentos
     this.departamentosService.getDepartamentos().subscribe(data => this.departamentos = data);
+  }
+
+  buscarAcompanhantes(id: number) {
+    this.colaboradorService.getAcompanhantes(id)
+        .subscribe(res => this.acompanhantes = res);
   }
 
   // logica modal dialogo edição
@@ -60,7 +68,6 @@ export class ListaconvidadosComponent implements OnInit {
 
   // logica exclusao
   excluirColaborador(element) {
-    console.log(element);
     const snackBarRef = this.snackBar.open(`Cadastro ${element.col_name} Excluído`, 'DESFAZER', {
       duration: 3000
     });
@@ -80,7 +87,6 @@ export class ListaconvidadosComponent implements OnInit {
     if (validaExclusao) {
       this.colaboradorService.deleteColaborador(id)
         .subscribe( () => this.carregarListas());
-      this.carregarListas();
     }
   }
 

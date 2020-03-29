@@ -18,7 +18,9 @@
     <ng-container matColumnDef="acompanhantes">
       <th mat-header-cell *matHeaderCellDef> Acompanhantes </th>
       <td mat-cell *matCellDef="let element">
-        {{element.companions}}
+        <div *ngFor="let element of colaboradores; let i=index; let outro of element.companions">
+          {{ outro }}
+        </div>
       </td>
     </ng-container>
 

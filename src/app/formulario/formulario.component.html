@@ -1,4 +1,4 @@
-<form [formGroup]="formColaborador" novalidate (ngSubmit)="onSubmit()">
+<form [formGroup]="formColaborador" (ngSubmit)="onSubmit()">
   <mat-card class="cartao-inscricao">
     <mat-card-header>
       <mat-card-title>Preencha O Formulário E Confirme Sua Presença</mat-card-title>
@@ -8,7 +8,7 @@
         <mat-form-field appearance="fill" class="nome-colaborador">
           <mat-label>Nome Completo</mat-label>
           <input matInput formControlName="nomeColaborador" #nomec>
-          <mat-error>Preencha e revise - Deve conter mais de 5 e menos de 30 caracteres</mat-error>
+          <mat-error>Não pode ser vazio - somente letras, minimo de 5 letras</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill" class="email-colaborador">
           <mat-label>Email Landix</mat-label>
@@ -19,7 +19,7 @@
           <mat-label>Departamento</mat-label>
           <mat-select formControlName="areaColaborador">
             <div *ngFor="let departamento of departamentos">
-              <mat-option value="option" (click)="atribuiDepartamento(departamento)">{{departamento.des_dep}}</mat-option>
+              <mat-option value="option" (click)="atribuiDepartamento(departamento, departamento.id_dep)">{{departamento.des_dep}}</mat-option>
             </div>
           </mat-select>
           <mat-error color="primary">Você deve selecionar uma opção</mat-error>
@@ -29,13 +29,14 @@
     </mat-card-content>
     <mat-radio-group>
       <mat-radio-button value="sim" #sim>Irei Levar Aconpanhante</mat-radio-button>
-      <mat-radio-button value="nao">Não Levarei Acompanhante</mat-radio-button>
+      <mat-radio-button value="nao" checked>Não Levarei Acompanhante</mat-radio-button>
     </mat-radio-group>
     <mat-card-content *ngIf='sim.checked'>
       <div class="container-fields2">
         <mat-form-field appearance="fill">
           <mat-label>Nome Acompanhante</mat-label>
-          <input matInput formControlName="acompanhante" required>
+          <input matInput formControlName="acompanhante">
+          <mat-hint>Se for mais de um, separe por vírgula Ex: acomp1,acomp2</mat-hint>
         </mat-form-field>
         <br>
       </div>
