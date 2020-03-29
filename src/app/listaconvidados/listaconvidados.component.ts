@@ -1,3 +1,4 @@
+import { DepartamentoService } from './../servicos/departamento.service';
 import { IColaborador } from './../servicos/colaborador';
 import { Component, OnInit } from '@angular/core';
 import { ColaboradorServiceService } from '../servicos/colaborador-service.service';
@@ -6,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from './../modal/modal.component';
 import * as jsPDF from './../../../node_modules/jspdf';
 import 'jspdf-autotable';
+import { IDepartamento } from '../servicos/departamento';
 
 @Component({
   selector: 'app-listaconvidados',
@@ -15,22 +17,27 @@ import 'jspdf-autotable';
 export class ListaconvidadosComponent implements OnInit {
 
   constructor(private colaboradorService: ColaboradorServiceService,
+              private departamentosService: DepartamentoService,
               private snackBar: MatSnackBar,
               public dialog: MatDialog) { }
 
   colaboradores: IColaborador[];
+
+  departamentos: IDepartamento[];
 
   exclusaoColaborador = true; // logica exclusao
 
   displayedColumns: string[] = ['colaborador', 'acompanhantes', 'edicaoexclusao'];
 
   ngOnInit(): void {
-    this.carregarLista();
+    this.carregarListas();
   }
 
-  carregarLista() {
-    this.colaboradorService.getColaboradores()
-    .subscribe(data => this.colaboradores = data);
+  carregarListas() {
+    // Carrega dados colaborador
+    this.colaboradorService.getColaboradores().subscribe(data => this.colaboradores = data);
+    // Carrega dados departamentos
+    this.departamentosService.getDepartamentos().subscribe(data => this.departamentos = data);
   }
 
   // logica modal dialogo edição
@@ -72,12 +79,13 @@ export class ListaconvidadosComponent implements OnInit {
   excluirColaboradorBD(validaExclusao: boolean, id: number) {
     if (validaExclusao) {
       this.colaboradorService.deleteColaborador(id)
-        .subscribe( () => this.carregarLista());
-      this.carregarLista();
+        .subscribe( () => this.carregarListas());
+      this.carregarListas();
     }
   }
 
   // salvar lista em PDF
+  // O Warning no console quando se sobe a aplicação não pode ser corrido, pois é da api de terceiro
   gerarPDF() {
     const doc = new jsPDF();
     doc.autoTable({

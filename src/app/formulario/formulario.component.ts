@@ -3,6 +3,9 @@ import { DepartamentoService } from './../servicos/departamento.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ColaboradorServiceService } from '../servicos/colaborador-service.service';
+import * as uuid from 'uuid';
+
+const myId = uuid.v4();
 
 @Component({
   selector: 'app-formulario',
@@ -50,27 +53,40 @@ export class FormularioComponent implements OnInit {
 
   // Aqui fica se observando dados alterados no servidor de backend
   ngOnInit() {
-    this.departamentoServico.getDepartamentos()
-      .subscribe(data => this.departamentos = data);
-    this.carregarLista();
+    this.carregarListas();
   }
 
-  /*filtra o Maior Id do Banco
-  retornaMaiorId(): number {
-    this.carregarLista();
-    //return Math.max(...this.colaboradores.id_col.map(o => o), 0);
-  }*/
-
-  carregarLista() {
+  // Carrega as listas do BD
+  carregarListas() {
     this.colaboradorService.getColaboradores()
     .subscribe(data => this.colaboradores = data);
+    this.departamentoServico.getDepartamentos()
+    .subscribe(data => this.departamentos = data);
   }
 
   // Classe para chamar o serviço de salvar no BD
   onSubmit() {
 
+    const data = {
+      id_col: 38434,
+      col_name: `André Vasconcelos Souto`,
+      col_email: `email@ag`,
+      id_dep : 3
+    };
+
+    console.log(data);
+
+    console.log(this.colaboradorService.sendPostRequest(data).subscribe());
+
+    this.colaboradorService.sendPostRequest(data).subscribe(
+      res => {
+        console.log(res.status);
+      }
+  );
+
   }
 
+  // lógica exibição no select
   atribuiDepartamento(departamentoSelecionado: string) {
     this.departamentoSelecionado = departamentoSelecionado;
   }

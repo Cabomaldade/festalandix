@@ -16,7 +16,7 @@
     <mat-label>Departamento</mat-label>
     <mat-select>
       <div *ngFor="let departamento of departamentos">
-        <mat-option value="atribuiDepartamento(departamento)" >{{departamento.valor}}</mat-option>
+        <mat-option value="option" (click)="atribuiDepartamento(departamento)">{{departamento.des_dep}}</mat-option>
       </div>
     </mat-select>
     <mat-error color="primary">Você deve selecionar uma opção</mat-error>
