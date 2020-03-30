@@ -66,7 +66,7 @@ export class ListaconvidadosComponent implements OnInit {
     });
   }
 
-  // logica exclusao
+  // logica exclusao Colaborador
   excluirColaborador(element) {
     const snackBarRef = this.snackBar.open(`Cadastro ${element.col_name} Excluído`, 'DESFAZER', {
       duration: 3000

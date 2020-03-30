@@ -94,5 +94,10 @@ export class ColaboradorServiceService {
     const url = `${this.api}companion/`;
     return this.http.put<any>(url, data , this.httpOptions);
   }
+
+  excluiAcompanhante(id: any): Observable<any> {
+    const url = `${this.api}companion/${id}`;
+    return this.http.delete(url);
+  }
 }
 

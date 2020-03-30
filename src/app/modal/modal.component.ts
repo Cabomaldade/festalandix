@@ -13,6 +13,8 @@ export class ModalComponent implements OnInit {
 
   departamentos = [];
 
+  acompanhantes = [];
+
   flag = false;
 
   areaSelecionada;
@@ -47,6 +49,8 @@ export class ModalComponent implements OnInit {
       idDep = this.data.id_dep_id;
     }
 
+    console.log(JSON.stringify(this.data.companions));
+
     const estrutura = {
       id_col: this.data.id_col,
       col_name: this.data.col_name,
@@ -57,6 +61,43 @@ export class ModalComponent implements OnInit {
     this.colaboradorServico.putColaborador(estrutura)
         .subscribe(res => {
           console.log(res);
+          this.excluirAcompanhantes(this.data.id_col);
+          this.salvarAcompanhantes(this.data.id_col, this.data.companions);
         });
+  }
+
+  alterarDadosAcompanhantes() {
+    console.log('TODO');
+  }
+
+  salvarAcompanhantes(id: number, nomeAcompanhantes: string[] ) {
+    console.log(nomeAcompanhantes);
+
+    let acompanhantes = [];
+    if (nomeAcompanhantes !== null) {
+        for (const acompanhante of nomeAcompanhantes) {
+          const tempData = {
+            comp_name: acompanhante.replace(',', ''),
+            id_col: id
+          };
+          this.colaboradorServico.postAcompanhante(tempData)
+            .subscribe();
+        }
+    } else {
+      acompanhantes = null;
+    }
+  }
+
+  excluirAcompanhantes(id: number) {
+    this.colaboradorServico.getAcompanhantes(id).subscribe(res => {
+      this.acompanhantes = res;
+
+      console.log(this.acompanhantes);
+      for (const temp of this.acompanhantes) {
+        console.log(temp.id_comp);
+        this.colaboradorServico.excluiAcompanhante(temp.id_comp)
+          .subscribe();
+      }
+    });
   }
 }
